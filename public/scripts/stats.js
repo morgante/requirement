@@ -24,13 +24,20 @@ $(document).ready( function( ) {
 	
 	$('#lookup').submit( function() {		
 		$.getJSON( '/api/people/rank?name=' + $('#lookup input.name').val(), function( data, status ) {
-			$('#lookup .rankStat.posts span.number strong').text( data.fbPosts );
-			$('#lookup .rankStat.posts span.rank strong').text( data.postRank );
-			
-			$('#lookup .rankStat.comments span.number strong').text( data.fbComments );
-			$('#lookup .rankStat.comments span.rank strong').text( data.commentRank );
-			
-			$('.rankStat').slideDown();
+			if( data.error == null )
+			{
+				$('#lookup .rankStat.posts span.number strong').text( data.fbPosts );
+				$('#lookup .rankStat.posts span.rank strong').text( data.postRank );
+
+				$('#lookup .rankStat.comments span.number strong').text( data.fbComments );
+				$('#lookup .rankStat.comments span.rank strong').text( data.commentRank );
+				
+				$('.rankStat').slideDown();
+			}
+			else
+			{
+				alert( data.error );
+			}			
 		});
 		
 		return false;

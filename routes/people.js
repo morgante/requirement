@@ -46,7 +46,8 @@ exports.rank = function( req, res ) {
 		}
 		else if( user == null )
 		{
-			res.send( { 'error': 'No such user' } );
+			console.log( name );
+			res.send( { 'error': 'Sorry, your name is strange. Check back later!' } );
 		}
 		else
 		{

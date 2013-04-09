@@ -63,12 +63,12 @@ exports.index = function( req, res ) {
 	
 	User.find({})
 			.sort( { 'fbPosts': 'desc' } )
-			.limit(5)
+			.limit(10)
 			.exec( function( err, requesters ) {
 																				
 				User.find({})
 						.sort( { 'fbComments': 'desc' } )
-						.limit(5)
+						.limit(10)
 						.exec( function( err, commentors ) {
 							
 							Post.count({}, function( err, count){
