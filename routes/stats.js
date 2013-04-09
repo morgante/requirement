@@ -114,6 +114,10 @@ exports.index = function( req, res ) {
 						.limit(10)
 						.exec( function( err, commentors ) {
 							
+							Post.findOne({}, function( err, post ) {
+								console.log( post );
+							});
+							
 							Post.count({}, function( err, count){
 							    res.render("stats", {
 										title: "Room of Requirement Stats",
