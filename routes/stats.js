@@ -45,27 +45,49 @@ exports.index = function( req, res ) {
 			.sort( { 'fbPosts': 'desc' } )
 			.limit(5)
 			.exec( function( err, requesters ) {
-				
-				var reqs = []
-				
-				requesters.forEach( function( usr ) {
-					usr.name = 'bob';
-					
-				});
-				
-				console.log( reqs );
-				
-				res.send( 'bob' );
 								
+				requesters.forEach( function( usr ) {
+					if( usr.name == undefined )
+					{
+						facebook.api( '/' + usr.fbID + '?fields=name,picture', function( err, data ) {
+							usr.name = data.name;
+							usr.photo = data.picture.data.url;
+
+							usr.save( function( err, usr ) {
+								console.log( usr );
+							} );
+						});
+					}
+				});
+																				
 				User.find({})
 						.sort( { 'fbComments': 'desc' } )
 						.limit(5)
 						.exec( function( err, commentors ) {
-							// res.render("stats", {
-							// 								title: "Room of Requirement Stats",
-							// 								requesters: requesters,
-							// 								commentors: commentors
-							// 							});
+							
+							commentors.forEach( function( usr ) {
+								if( usr.name == undefined )
+								{
+									facebook.api( '/' + usr.fbID + '?fields=name,picture', function( err, data ) {
+										usr.name = data.name;
+										usr.photo = data.picture.data.url;
+
+										usr.save( function( err, usr ) {
+											console.log( usr );
+										} );
+									});
+								}
+							});
+							
+							Post.count({}, function( err, count){
+							    res.render("stats", {
+										title: "Room of Requirement Stats",
+										requesters: requesters,
+										commentors: commentors,
+										totalPosts: count
+									});
+							})							
+							
 						});
 			});
 	

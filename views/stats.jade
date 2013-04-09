@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	h1= title
+	
+	h3.total.posts #{totalPosts} total posts
+	
+	div.people.stats#comments
+		h2
+			strong Top Commentors
+			em These helpful people replied the most.
+		ul
+			each person in commentors
+				li
+					img(src=person.photo)
+					strong=person.name
+					em  (#{person.fbComments } comments)
+					
+	div.people.stats#requesters
+		h2
+			strong Top Requesters
+			em These lovely people required the most.
+		ul
+			each person in requesters
+				li
+					img(src=person.photo)
+					strong=person.name
+					em  (#{person.fbPosts } posts)

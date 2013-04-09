@@ -1,7 +1,69 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px Helvetica, serif;
+  background: #fff;
+  padding: 0;
+  margin: 0;
 }
-a {
-  color: #00b7ff;
+h1 {
+  background: #57068c;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 250%;
+  line-height: 3em;
+  color: #fff;
+}
+h2 {
+  background: #87c400;
+  color: #fff;
+  font-size: 100%;
+  padding-left: 20px;
+  line-height: 2em;
+  text-align: left;
+  position: relative;
+  margin-top: 0;
+}
+h2 strong {
+  font-size: 200%;
+  line-height: 2em;
+}
+h2 em {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  line-height: 4em;
+  text-align: right;
+}
+h3 {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  font-size: 125%;
+  color: #fff;
+  line-height: 4em;
+}
+.stats {
+  width: 50%;
+  float: left;
+}
+.stats ul,
+.stats li {
+  list-style: none;
+}
+.stats.people li {
+  margin-bottom: 3px;
+  height: 50px;
+  padding-left: 55px;
+  line-height: 50px;
+  position: relative;
+  font-size: 180%;
+}
+.stats.people li img {
+  display: block;
+  position: absolute;
+  left: 0;
+}
+#requesters h2 {
+  background: #d1ab00;
 }
