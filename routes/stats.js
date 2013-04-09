@@ -15,12 +15,14 @@ function fetchPosts( url, cb, posts )
 	
 	facebook.api( url, function(err, data) {
 		
-		console.log( url );
+		// console.log( url );
 		
 	  // console.log(data); // => { id: ... }
 		posts = posts.concat( data.data );
 		
-		if( data.paging.next && posts.lenth < 25 )
+		console.log( 'parsed ' + posts.length );
+		
+		if( data.paging.next )
 		{
 			fetchPosts( data.paging.next, cb, posts )
 		}
