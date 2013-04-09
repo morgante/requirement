@@ -40,6 +40,38 @@ function fetchPosts( url, cb, posts )
 }
 
 exports.index = function( req, res ) {
+	
+	User.find({})
+			.sort( { 'fbPosts': 'desc' } )
+			.limit(5)
+			.exec( function( err, requesters ) {
+				
+				var reqs = []
+				
+				requesters.forEach( function( usr ) {
+					usr.name = 'bob';
+					
+				});
+				
+				console.log( reqs );
+				
+				res.send( 'bob' );
+								
+				User.find({})
+						.sort( { 'fbComments': 'desc' } )
+						.limit(5)
+						.exec( function( err, commentors ) {
+							// res.render("stats", {
+							// 								title: "Room of Requirement Stats",
+							// 								requesters: requesters,
+							// 								commentors: commentors
+							// 							});
+						});
+			});
+	
+}
+
+exports.runner = function( req, res ) {
 	// ROR: 154302261314403
 	
 	var users = {};
@@ -65,23 +97,23 @@ exports.index = function( req, res ) {
 		// 			});	
 		// 		} );
 		
-		Post.find({}, function( err, posts ) {
-			posts.forEach( function( post ) {
-								
-				User.findOneAndUpdate( { 'fbID': post.from.id }, { '$inc': { 'fbPosts': 1 } }, { 'upsert': true }, function( err ) {
-
-				} );
-
-				if( post.comments != undefined )
-				{
-					post.comments.data.forEach( function( cmt ) {
-						User.findOneAndUpdate( { 'fbID': cmt.from.id }, { '$inc': { 'fbComments': 1 } }, { 'upsert': true }, function( err ) {
-
-						} );
-					});
-				}
-			});
-		});
+		// Post.find({}, function( err, posts ) {
+		// 	posts.forEach( function( post ) {
+		// 						
+		// 		User.findOneAndUpdate( { 'fbID': post.from.id }, { '$inc': { 'fbPosts': 1 } }, { 'upsert': true }, function( err ) {
+		// 
+		// 		} );
+		// 
+		// 		if( post.comments != undefined )
+		// 		{
+		// 			post.comments.data.forEach( function( cmt ) {
+		// 				User.findOneAndUpdate( { 'fbID': cmt.from.id }, { '$inc': { 'fbComments': 1 } }, { 'upsert': true }, function( err ) {
+		// 
+		// 				} );
+		// 			});
+		// 		}
+		// 	});
+		// });
 		
 		// console.log( group );
 	
