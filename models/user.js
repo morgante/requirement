@@ -8,7 +8,8 @@ var userSchema = mongoose.Schema({
 	fbPosts: {type: Number, default: 0},
 	postRank: Number,
 	fbComments: {type: Number, default: 0},
-	commentRank: Number
+	commentRank: Number,
+	disabled: {type: Boolean, default: false}
 });
 
 userSchema.methods.getRank = function (cb) {
@@ -18,10 +19,10 @@ userSchema.methods.getRank = function (cb) {
 		
 	usr = this;
 		
-	User.count( { 'fbPosts' : { $gt : usr.fbPosts } }, function( err, count ) {
+	User.count( { 'fbPosts' : { $gt : usr.fbPosts }, 'disabled': { '$not': true } }, function( err, count ) {
 		usr.postRank = count + 1;
 				
-		User.count( { 'fbComments' : { $gt : usr.fbComments } }, function( err, count ) {
+		User.count( { 'fbComments' : { $gt : usr.fbComments }, 'disabled': { '$not': true } }, function( err, count ) {
 			
 			usr.commentRank = count + 1;
 			
