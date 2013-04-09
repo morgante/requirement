@@ -47,7 +47,7 @@ app.configure('development', function(){
 app.get('/', stats.index);
 app.get('/api/people/search', people.search);
 app.get('/api/people/rank', people.rank);
-
+app.get('/update', stats.update);
 
 // app.get('/projects', project.list);
 // app.get('/projects/edit', project.edit);
