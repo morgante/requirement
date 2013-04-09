@@ -2,7 +2,8 @@
 var express = require('express')
 	, http = require('http')
 	, path = require('path');
-var stats = require('./routes/stats');
+var stats = require('./routes/stats')
+	, people = require('./routes/people');
 var passport = require('passport')
   , NYUPassportStrategy = require('passport-nyu').Strategy;
 
@@ -44,6 +45,8 @@ app.configure('development', function(){
 
 // all routes
 app.get('/', stats.index);
+app.get('/api/people/lookup', people.lookup);
+
 // app.get('/projects', project.list);
 // app.get('/projects/edit', project.edit);
 // app.post('/project/:slug/update', project.update);

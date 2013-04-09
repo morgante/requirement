@@ -39,45 +39,37 @@ function fetchPosts( url, cb, posts )
 	});
 }
 
+function fillUsers() {
+	User.find({}, function( err, users ) {
+		users.forEach( function( usr ) {
+			if( usr.name == undefined )
+			{
+				facebook.api( '/' + usr.fbID + '?fields=name,picture', function( err, data ) {
+					usr.name = data.name;
+					usr.photo = data.picture.data.url;
+
+					usr.save( function( err, usr ) {
+						console.log( usr );
+					} );
+				});
+			}
+		});
+	});
+}
+
 exports.index = function( req, res ) {
+	
+	fillUsers();
 	
 	User.find({})
 			.sort( { 'fbPosts': 'desc' } )
 			.limit(5)
 			.exec( function( err, requesters ) {
-								
-				requesters.forEach( function( usr ) {
-					if( usr.name == undefined )
-					{
-						facebook.api( '/' + usr.fbID + '?fields=name,picture', function( err, data ) {
-							usr.name = data.name;
-							usr.photo = data.picture.data.url;
-
-							usr.save( function( err, usr ) {
-								console.log( usr );
-							} );
-						});
-					}
-				});
 																				
 				User.find({})
 						.sort( { 'fbComments': 'desc' } )
 						.limit(5)
 						.exec( function( err, commentors ) {
-							
-							commentors.forEach( function( usr ) {
-								if( usr.name == undefined )
-								{
-									facebook.api( '/' + usr.fbID + '?fields=name,picture', function( err, data ) {
-										usr.name = data.name;
-										usr.photo = data.picture.data.url;
-
-										usr.save( function( err, usr ) {
-											console.log( usr );
-										} );
-									});
-								}
-							});
 							
 							Post.count({}, function( err, count){
 							    res.render("stats", {
