@@ -38,9 +38,13 @@ $(document).ready( function( ) {
 			{
 				alert( data.error );
 			}			
-		});
-		
+		});		
 		return false;
+	});
+	
+	$('.people.stats a').click( function() {
+		$('#lookup input.name').val( $('strong', this).text() );
+		$('#lookup').submit();
 	});
 	
 });
