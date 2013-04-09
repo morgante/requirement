@@ -42,13 +42,19 @@ h2
 		line-height: 4em
 		text-align: right
 
-h3
+p.upper
 	position: absolute
 	top: 0px
-	right: 5px
+	right: 30px
 	font-size: 125%
 	color: $alternate-color
 	line-height: 4em
+
+.btn.toggleRank
+	display: block
+	position: absolute
+	top: 20px
+	left: 30px
 
 .stats
 	ul, li
@@ -73,3 +79,15 @@ h3
 #requesters
 	h2
 		background: $tertiary-color
+
+#lookup
+	.rankStat
+		display: none
+		
+		.controls
+			span
+				display: block
+				padding-top: 5px
+
+.modal-body
+	overflow-y: visible

@@ -45,7 +45,9 @@ app.configure('development', function(){
 
 // all routes
 app.get('/', stats.index);
-app.get('/api/people/lookup', people.lookup);
+app.get('/api/people/search', people.search);
+app.get('/api/people/rank', people.rank);
+
 
 // app.get('/projects', project.list);
 // app.get('/projects/edit', project.edit);

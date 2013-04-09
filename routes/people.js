@@ -1,13 +1,49 @@
 var User = require('../models/user');
 
-exports.lookup = function( req, res )
-{	
-	// db.elections.update({'name': 'NYU All-University Elections'}, {$pull: {'races': {'name': /.*Stern Undergraduate.*/}}} )
+exports.search = function( req, res ) {		
+	name = req.query.term;
+	type = req.query.type;
 	
+	responses = [];
+	
+	if( name == undefined || name == null )
+	{
+		where = {};
+	}
+	else
+	{
+		where = {'name': { '$regex': name + '.*', $options: 'i' } };
+	}
+	
+	User.find( where, function( err, users ) {
+		users.forEach( function (user ) {
+			if( type == 'simple' )
+			{
+				responses.push( user.name );
+			}
+			else
+			{
+				responses.push( {
+					'value': user.name,
+					'label': user.name,
+					'photo': user.photo
+				} );
+			}
+		} );
+				
+		res.send( responses );
+	} );
+	
+}
+
+exports.rank = function( req, res ) {		
 	name = req.query.name;
 	
-	User.find( {'name': { '$regex': name + '.*', $options: 'i' } }, function( err, users ) {
-		res.send( users );
+	User.findOne( {'name': name }, function( err, user ) {
+		user.getRank( function( postRank, commentRank ) {				
+			res.send( user );
+		});
+		
+		
 	});
-	
 }
