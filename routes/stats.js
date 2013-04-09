@@ -27,7 +27,7 @@ function fetchPosts( url, cb, posts )
 			Post.create( post, function() {} );
 		});
 		
-		if( data.paging.next )
+		if( data.paging && data.paging.next )
 		{
 			fetchPosts( data.paging.next, cb, posts )
 		}
@@ -47,23 +47,41 @@ exports.index = function( req, res ) {
 	Group.create( { 'fbID': 154302261314403, 'lastParsedTime': 1364849754 }, function() {} );
 		
 	Group.findOne( { 'fbID': 154302261314403 }, function( err, group ) {				
-		fetchPosts( '/' + group.fbID + '/feed?limit=25&since=' + group.lastParsedTime.getTime(), function( posts ) {
-			posts.forEach( function( element ) {
+		// fetchPosts( '/' + group.fbID + '/feed?limit=25&since=' + group.lastParsedTime.getTime(), function( posts ) {
+		// 			posts.forEach( function( element ) {
+		// 								
+		// 				User.findOneAndUpdate( { 'fbID': element.from.id }, { '$inc': { 'fbPosts': 1 } }, { 'upsert': true }, function( err ) {
+		// 
+		// 				} );
+		// 
+		// 				if( element.comments != undefined )
+		// 				{
+		// 					element.comments.data.forEach( function( cmt ) {
+		// 						User.findOneAndUpdate( { 'fbID': cmt.from.id }, { '$inc': { 'fbComments': 1 } }, { 'upsert': true }, function( err ) {
+		// 
+		// 						} );
+		// 					});
+		// 				}
+		// 			});	
+		// 		} );
+		
+		Post.find({}, function( err, posts ) {
+			posts.forEach( function( post ) {
 								
-				User.findOneAndUpdate( { 'fbID': element.from.id }, { '$inc': { 'fbPosts': 1 } }, { 'upsert': true }, function( err ) {
+				User.findOneAndUpdate( { 'fbID': post.from.id }, { '$inc': { 'fbPosts': 1 } }, { 'upsert': true }, function( err ) {
 
 				} );
 
-				if( element.comments != undefined )
+				if( post.comments != undefined )
 				{
-					element.comments.data.forEach( function( cmt ) {
+					post.comments.data.forEach( function( cmt ) {
 						User.findOneAndUpdate( { 'fbID': cmt.from.id }, { '$inc': { 'fbComments': 1 } }, { 'upsert': true }, function( err ) {
 
 						} );
 					});
 				}
-			});	
-		} );
+			});
+		});
 		
 		// console.log( group );
 	
