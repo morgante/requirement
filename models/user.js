@@ -19,10 +19,10 @@ userSchema.methods.getRank = function (cb) {
 		
 	usr = this;
 		
-	User.count( { 'fbPosts' : { $gt : usr.fbPosts }, 'disabled': { '$not': true } }, function( err, count ) {
+	User.count( { 'fbPosts' : { $gt : usr.fbPosts } }, function( err, count ) {
 		usr.postRank = count + 1;
 				
-		User.count( { 'fbComments' : { $gt : usr.fbComments }, 'disabled': { '$not': true } }, function( err, count ) {
+		User.count( { 'fbComments' : { $gt : usr.fbComments } }, function( err, count ) {
 			
 			usr.commentRank = count + 1;
 			
