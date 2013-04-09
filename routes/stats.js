@@ -15,6 +15,8 @@ function fetchPosts( url, cb, posts )
 	
 	facebook.api( url, function(err, data) {
 		
+		console.log( url );
+		
 	  // console.log(data); // => { id: ... }
 		posts = posts.concat( data.data );
 		
@@ -35,7 +37,7 @@ exports.index = function( req, res ) {
 	
 	var users = {};
 	
-	// Group.create( { 'fbID': 154302261314403, 'lastParsedTime': 1364849754 }, function() {} );
+	Group.create( { 'fbID': 154302261314403, 'lastParsedTime': 1364849754 }, function() {} );
 		
 	Group.findOne( { 'fbID': 154302261314403 }, function( err, group ) {				
 		fetchPosts( '/' + group.fbID + '/feed?limit=25&since=' + group.lastParsedTime.getTime(), function( data ) {
