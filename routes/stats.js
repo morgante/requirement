@@ -1,6 +1,7 @@
 var Facebook = require('facebook-node-sdk');
 var User = require('../models/user');
 var Group = require('../models/group');
+var Post = require('../models/post');
 
 var facebook = new Facebook({ appID: process.env.FACEBOOK_APP, secret: process.env.FACEBOOK_SECRET });
 
@@ -22,6 +23,10 @@ function fetchPosts( url, cb, posts )
 		
 		console.log( 'parsed ' + posts.length );
 		
+		data.data.forEach( function( post ) {
+			Post.create( post, function() {} );
+		});
+		
 		if( data.paging.next )
 		{
 			fetchPosts( data.paging.next, cb, posts )
@@ -42,8 +47,9 @@ exports.index = function( req, res ) {
 	Group.create( { 'fbID': 154302261314403, 'lastParsedTime': 1364849754 }, function() {} );
 		
 	Group.findOne( { 'fbID': 154302261314403 }, function( err, group ) {				
-		fetchPosts( '/' + group.fbID + '/feed?limit=25&since=' + group.lastParsedTime.getTime(), function( data ) {
-			data.forEach( function( element ) {
+		fetchPosts( '/' + group.fbID + '/feed?limit=25&since=' + group.lastParsedTime.getTime(), function( posts ) {
+			posts.forEach( function( element ) {
+								
 				User.findOneAndUpdate( { 'fbID': element.from.id }, { '$inc': { 'fbPosts': 1 } }, { 'upsert': true }, function( err ) {
 
 				} );
