@@ -10,7 +10,7 @@
 		"passport": "*",
 		"passport-google": "*",
 		"passport-nyu": "*",
-		"github": "*"
+		"facebook-node-sdk": "*"
 	},
 	"engines": {
 		"node": "0.8.x",
