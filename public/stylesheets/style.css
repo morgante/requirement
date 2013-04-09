@@ -43,6 +43,14 @@ p.upper {
   color: #fff;
   line-height: 4em;
 }
+p.removed {
+  position: absolute;
+  top: 75px;
+  width: 100%;
+  font-size: 115%;
+  text-align: center;
+  color: #fff;
+}
 .btn.toggleRank {
   display: block;
   position: absolute;
