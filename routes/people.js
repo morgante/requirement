@@ -40,10 +40,19 @@ exports.rank = function( req, res ) {
 	name = req.query.name;
 	
 	User.findOne( {'name': name }, function( err, user ) {
-		user.getRank( function( postRank, commentRank ) {				
-			res.send( user );
-		});
-		
-		
+		if( err )
+		{
+			res.send( err );
+		}
+		else if( user == null )
+		{
+			res.send( { 'error': 'No such user' } );
+		}
+		else
+		{
+			user.getRank( function( postRank, commentRank ) {				
+				res.send( user );
+			});
+		}
 	});
 }
