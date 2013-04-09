@@ -104,12 +104,12 @@ exports.index = function( req, res ) {
 	
 	fillUsers();
 	
-	User.find({ 'disabled': { '$not': true } })
+	User.find({})
 			.sort( { 'fbPosts': 'desc' } )
 			.limit(10)
 			.exec( function( err, requesters ) {
 																				
-				User.find({ 'disabled': { '$not': true } })
+				User.find({})
 						.sort( { 'fbComments': 'desc' } )
 						.limit(10)
 						.exec( function( err, commentors ) {
