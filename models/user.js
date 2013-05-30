@@ -8,8 +8,7 @@ var userSchema = mongoose.Schema({
 	fbPosts: {type: Number, default: 0},
 	postRank: Number,
 	fbComments: {type: Number, default: 0},
-	commentRank: Number,
-	disabled: {type: Boolean, default: false}
+	commentRank: Number
 });
 
 userSchema.methods.getRank = function (cb) {

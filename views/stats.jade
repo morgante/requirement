@@ -4,9 +4,7 @@ block content
 	h1= title
 	
 	p.upper.total.posts #{totalPosts} total posts
-	
-	button.btn.toggleRank.btn-large(type='button',data-toggle='modal',data-target='#lookup') Find your rank
-	
+		
 	p.removed Some names have been removed to protect the innocent.
 	
 	div.people.stats#comments
@@ -32,7 +30,9 @@ block content
 						img(src=person.photo)
 						strong=person.name
 						em  (#{person.fbPosts } posts)
-					
+	
+	button.btn.toggleRank.btn-large(type='button',data-toggle='modal',data-target='#lookup') Find your rank
+				
 	form.modal.hide.fide.form-horizontal#lookup(aria-labelledby="lookup",aria-hidden="true")
 		.modal-header
 			button(type='button',class='close',data-dismiss='modal',aria-hidden='true') &times;
