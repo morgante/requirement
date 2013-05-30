@@ -9,7 +9,9 @@ var postSchema = mongoose.Schema({
 	type: String,
 	created_time: Date,
 	updated_time: Date,
-	comments: mongoose.Schema.Types.Mixed
+	comments: mongoose.Schema.Types.Mixed,
+	processed: {type: Boolean, default: false},
+	faq: {type: mongoose.Schema.Types.Mixed, default: null}
 });
 
 var Post = module.exports = mongoose.model('Post', postSchema);
