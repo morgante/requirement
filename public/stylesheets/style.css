@@ -35,6 +35,9 @@ h1.stats {
   color: #fff;
   font-weight: bold;
 }
+.footer p {
+  text-align: center;
+}
 h2 {
   background: #87c400;
   color: #fff;
