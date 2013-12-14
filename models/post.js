@@ -71,7 +71,7 @@ schema.post('save', function (post) {
 			} else if (faq != comment.message) {
 				var answer;
 				var update = false;
-				if (stripped.length > 3) {
+				if (faq.length > 3) {
 					// if there are more than 3 characters, assume this is the answer
 					answer = faq;
 
@@ -100,6 +100,8 @@ schema.post('save', function (post) {
 								question.answer = answer;
 							}
 						}
+
+						console.log(question, answer, post.comments.data[0]);
 
 						// add ourselves on
 						question.posts.push(post._id);
