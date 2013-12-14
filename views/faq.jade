@@ -1,5 +1,8 @@
 extends layout
 
+block scripts
+	script(src='/scripts/faq.js')
+
 block content
 	.header
 		nav.navbar.navbar-static-top(role="navigation")
@@ -21,14 +24,15 @@ block content
 						a(href="#",title="What are my stats?") Stats
 
 
-	.container
+	.container#faq
 		div.jumbotron
 			div#questions.panel-group
 				each question in questions
-					.panel.panel-default
-						.panel-heading
-							h4.panel-title
-								a(data-toggle="collapse",data-parent="#questions",href='#' + question._id)=question.question
-					div(id=question._id).panel-collapse.collapse
-						.panel-body
-							p=question.answer
+					.question
+						.panel.panel-default
+							.panel-heading
+								h4.panel-title
+									a(data-toggle="collapse",data-parent="#questions",href='#' + question._id)=question.question
+						div(id=question._id).panel-collapse.collapse.answer
+							.panel-body
+								p=question.answer
