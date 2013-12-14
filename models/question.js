@@ -25,6 +25,13 @@ var compare = {
 };
 
 /**
+ * Get the URL for the question
+ */
+schema.method('url', function() {
+	return process.env.BASE_URL + '/faq#' + this._id;
+});
+
+/**
  * Find a matching question for given text
  *
  * @param {Post} post The post to find a match for

@@ -4,6 +4,8 @@ var _ = require('underscore');
 
 var Question = require('./question');
 
+var facebook = require('../lib/facebook');
+
 var schema = mongoose.Schema({
 	message: String,
 	id: String,
@@ -20,7 +22,7 @@ var schema = mongoose.Schema({
 
 schema.post('save', function (post) {
 	// FAQ processing
-	if (post.question == null) {
+	if (post.question == null && post.comments) {
 		post.comments.data.forEach(function(comment) {
 			var stripped = comment.message.replace(/( )?#answer/, '');
 			var faq = comment.message.replace(/( )?#faq/, '');
@@ -56,6 +58,14 @@ schema.post('save', function (post) {
 					post.question = question._id;
 					post.save(function(err, p) {
 
+					});
+
+					facebook.graph('/' + post.id + '/comments', 'POST', {
+						message: 'That question has been added to the FAQ: ' + question.url()
+					}, function(err, res) {
+						if (err) {
+							console.log('Error posting', err);
+						}
 					});
 				});
 			} else if (faq != comment.message) {
@@ -94,11 +104,18 @@ schema.post('save', function (post) {
 						// add ourselves on
 						question.posts.push(post._id);
 						question.posts = _.unique(question.posts);
-						console.log(question.posts);
 						question.save(function(err, q) {
 							post.question = question._id;
 							post.save(function(err, p) {
 
+							});
+
+							facebook.graph('/' + post.id + '/comments', 'POST', {
+								message: 'That question is in the FAQ: ' + question.url()
+							}, function(err, res) {
+								if (err) {
+									console.log('Error posting', err);
+								}
 							});
 						});
 					}

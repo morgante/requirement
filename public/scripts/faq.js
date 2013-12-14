@@ -7,7 +7,7 @@
 		if ($('#faq').length < 1) {
 			return;
 		}
-
+		
 		$search = $('#search');
 		$questions = $('.question');
 		$answers = $('.answer');

@@ -48,6 +48,7 @@ app.configure('development', function(){
 
 // all routes
 app.get('/', questions.index);
+app.get('/faq', questions.index);
 
 app.get('/train', trainer.index);
 app.get('/train/new', trainer.create_faq);
