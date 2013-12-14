@@ -14,11 +14,9 @@ $(document).ready( function( ) {
 	$.getJSON( '/api/people/search?type=simple', function( data, status ) {
 		$('#lookup input.name').typeahead({
 			local: data,
-			updater:function (item) {
-				$('#lookup input.name').val( item );
-				$('#lookup').submit();
-				return item;
-			}
+			name: 'names'
+		}).on('typeahead:autocompleted', function(e) {
+			$('#lookup').submit();
 		});
 	});
 	
