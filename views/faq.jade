@@ -3,13 +3,14 @@ extends layout
 block content
 	h1= title
 
-	div.container
-		div#questions.panel-group
-			each question in questions
-				.panel.panel-default
-					.panel-heading
-						h4.panel-title
-							a(data-toggle="collapse",data-parent="#questions",href='#' + question._id)=question.question
-				div(id=question._id).panel-collapse.collapse
-					.panel-body
-						p=question.answer
+	.container
+		div.jumbotron
+			div#questions.panel-group
+				each question in questions
+					.panel.panel-default
+						.panel-heading
+							h4.panel-title
+								a(data-toggle="collapse",data-parent="#questions",href='#' + question._id)=question.question
+					div(id=question._id).panel-collapse.collapse
+						.panel-body
+							p=question.answer
