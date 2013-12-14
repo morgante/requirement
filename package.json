@@ -11,7 +11,8 @@
     "passport-google": "*",
     "passport-nyu": "*",
     "facebook-node-sdk": "*",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "natural": "~0.1.25"
   },
   "engines": {
     "node": "0.8.x",
