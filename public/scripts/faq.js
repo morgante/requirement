@@ -26,6 +26,13 @@
 				$questions.children('.answer').collapse('hide');
 			}
 		});
+
+		if (window.location.hash) {
+			var $q = $(window.location.hash);
+			if ($q.length > 0) {
+				$q.collapse('show');
+			}
+		}
 	};
 
 	$(init);
