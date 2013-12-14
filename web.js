@@ -60,7 +60,7 @@ app.get('/api/people/rank', people.rank);
 app.get('/update', stats.update);
 
 // do collection
-// collector.all();
+collector.all();
 
 // app.get('/projects', project.list);
 // app.get('/projects/edit', project.edit);

@@ -21,10 +21,8 @@ var compare = {
 		stem2 = compare.simplify(str2);
 
 		return _.intersection(stem1, stem2).length;
-
-		return 0.5;
 	}
-}
+};
 
 /**
  * Find a matching question for given text
@@ -44,9 +42,13 @@ schema.static('findMatch', function (post, minScore, callback) {
 			if (err) {
 				callback(err, null);
 			} else {
-				var match = null;
+				var match = {
+					score: 0,
+					question: null
+				};
 				questions.forEach(function(question) {
 					var score = compare.score(post.message, question.question);
+					console.log(post.message, question.question, score, minScore);
 					if (score >= minScore) {
 						if (match == null || score >= match.score) {
 							match = {
@@ -56,6 +58,7 @@ schema.static('findMatch', function (post, minScore, callback) {
 						}
 					}
 				});
+
 				callback(null, match.question);
 			}
 		});
