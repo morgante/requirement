@@ -8,7 +8,7 @@ body {
   background: #fff;
   margin-top: 50px;
 }
-h1 {
+h1.stats {
   background: #57068c;
   margin: 0;
   text-align: center;
@@ -17,6 +17,22 @@ h1 {
   font-size: 250%;
   line-height: 3em;
   color: #fff;
+}
+.header .navbar {
+  background: #57068c;
+  height: 6.5em;
+  color: #fff;
+}
+.header .navbar .sec {
+  margin-top: 20px;
+}
+.header .navbar h1 {
+  margin-top: 0;
+  text-align: center;
+}
+.header .navbar a {
+  color: #fff;
+  font-weight: bold;
 }
 h2 {
   background: #87c400;

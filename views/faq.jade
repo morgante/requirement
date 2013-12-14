@@ -1,7 +1,25 @@
 extends layout
 
 block content
-	h1= title
+	.header
+		nav.navbar.navbar-static-top(role="navigation")
+			.col-sm-3.col-md-3.pull-left.sec
+				form.navbar-form.form-inline.navbar-left(role="search")
+					.form-group
+						.input-group
+							.input-group-addon
+								label(for="search")
+									i.glyphicon.glyphicon-search
+							input#search(type="text",placeholder="Search").form-control							
+			.col-sm-6.col-md-6.sec
+				h1=title
+			.col-sm-3.col-md-3.pull-right.sec
+				ul.nav.navbar-nav.pull-right
+					li
+						a(href="#",title="How can I contribute?") Help
+					li
+						a(href="#",title="What are my stats?") Stats
+
 
 	.container
 		div.jumbotron
