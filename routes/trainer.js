@@ -1,4 +1,3 @@
-var Facebook = require('facebook-node-sdk');
 var User = require('../models/user');
 var Group = require('../models/group');
 var Post = require('../models/post');

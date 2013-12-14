@@ -6,6 +6,7 @@ var stats = require('./routes/stats')
 	, questions = require('./routes/questions')
 	, trainer = require('./routes/trainer')
 	, people = require('./routes/people');
+var collector = require('./lib/collect');
 var passport = require('passport')
   , NYUPassportStrategy = require('passport-nyu').Strategy;
 
@@ -47,14 +48,19 @@ app.configure('development', function(){
 
 // all routes
 app.get('/', questions.index);
+
 app.get('/train', trainer.index);
 app.get('/train/new', trainer.create_faq);
 app.get('/train/assign', trainer.assign);
 app.get('/train/ignore', trainer.ignore);
+
 app.get('/stats', stats.index);
 app.get('/api/people/search', people.search);
 app.get('/api/people/rank', people.rank);
 app.get('/update', stats.update);
+
+// do collection
+collector.all();
 
 // app.get('/projects', project.list);
 // app.get('/projects/edit', project.edit);

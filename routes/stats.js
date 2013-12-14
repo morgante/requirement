@@ -76,39 +76,39 @@ function fillUsers() {
 
 exports.update = function( req, res ) {
 	
-	Post.findOne({}).sort( { updated_time: -1 } ).exec( function( err, post ) {
-		if( post != null )
-		{
-			console.log( post.comments );
-			after = post.updated_time;
-		}
-		else
-		{
-			after = false;
-		}
+	// Post.findOne({}).sort( { updated_time: -1 } ).exec( function( err, post ) {
+	// 	if( post != null )
+	// 	{
+	// 		console.log( post.comments );
+	// 		after = post.updated_time;
+	// 	}
+	// 	else
+	// 	{
+	// 		after = false;
+	// 	}
 		
-		fetchPosts( '/154302261314403/feed?limit=25', after, function( err ) {			
-			// posts.foreach( function( element ) {
-			// 		
-			// 	group.lastParsedTime = Date.parse( element.created_time );
-			// 
-			// 	User.findOneAndUpdate( { 'fbID': element.from.id }, { '$inc': { 'fbPosts': 1 } }, { 'upsert': true }, function( err ) {
-			// 		
-			// 	} );
-			// 		
-			// 	if( element.comments != undefined )
-			// 	{
-			// 		element.comments.data.forEach( function( cmt ) {
-			// 			User.findOneAndUpdate( { 'fbID': cmt.from.id }, { '$inc': { 'fbComments': 1 } }, { 'upsert': true }, function( err ) {
-			// 		
-			// 			} );
-			// 		});
-			// 	}
-			// });
+	// 	fetchPosts( '/154302261314403/feed?limit=25', after, function( err ) {			
+	// 		// posts.foreach( function( element ) {
+	// 		// 		
+	// 		// 	group.lastParsedTime = Date.parse( element.created_time );
+	// 		// 
+	// 		// 	User.findOneAndUpdate( { 'fbID': element.from.id }, { '$inc': { 'fbPosts': 1 } }, { 'upsert': true }, function( err ) {
+	// 		// 		
+	// 		// 	} );
+	// 		// 		
+	// 		// 	if( element.comments != undefined )
+	// 		// 	{
+	// 		// 		element.comments.data.forEach( function( cmt ) {
+	// 		// 			User.findOneAndUpdate( { 'fbID': cmt.from.id }, { '$inc': { 'fbComments': 1 } }, { 'upsert': true }, function( err ) {
+	// 		// 		
+	// 		// 			} );
+	// 		// 		});
+	// 		// 	}
+	// 		// });
 					
-				// group.save( function() {} );
-		} );
-	});
+	// 			// group.save( function() {} );
+	// 	} );
+	// });
 	
 
 		
@@ -153,7 +153,7 @@ exports.update = function( req, res ) {
 
 exports.index = function( req, res ) {
 	
-	fillUsers();
+	// fillUsers();
 	
 	User.find({})
 			.sort( { 'fbPosts': 'desc' } )
