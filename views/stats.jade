@@ -1,6 +1,7 @@
 extends layout
 
 block scripts
+	script(src='/scripts/typehead.js')
 	script(src='/scripts/stats.js')
 
 block content
@@ -35,34 +36,36 @@ block content
 						em  (#{person.fbPosts } posts)
 	
 	button.btn.toggleRank.btn-large(type='button',data-toggle='modal',data-target='#lookup') Find your rank
-				
-	form.modal.hide.fide.form-horizontal#lookup(aria-labelledby="lookup",aria-hidden="true")
-		.modal-header
-			button(type='button',class='close',data-dismiss='modal',aria-hidden='true') &times;
-			h3 Find Your Rank
-		.modal-body
-			.control-group
-				label.control-label(for='name') Name: 
-				.controls
-					input.name#name(type='text',autocomplete='off')
-			.rankStat.posts.control-group
-				span.control-label Posts in RoR:
-				.controls
-					span.number
-						|  Number: 
-						strong 120
-					span.rank
-						|  Rank: 
-						strong 120
-			.rankStat.comments.control-group
-				span.control-label Comments in RoR:
-				.controls
-					span.number
-						|  Number: 
-						strong 120
-					span.rank
-						|  Rank: 
-						strong 120
-		.modal-footer
-			input.btn.btn-primary(type='submit',value='Lookup')
-			button.btn(data-dismiss='modal',aria-hidden='true') Close
+
+	.modal.fade#lookup(role="dialog",aria-labelledby="lookupLabel",aria-hidden="true")
+		.modal-dialog
+			.modal-content
+					.modal-header
+						button(type='button',class='close',data-dismiss='modal',aria-hidden='true') &times;
+						h3.modal-title#lookupLabel Find Your Rank
+					.modal-body
+						.control-group
+							label.control-label(for='name') Name: 
+							.controls
+								input.name#name(type='text',autocomplete='off')
+						.rankStat.posts.control-group
+							span.control-label Posts in RoR:
+							.controls
+								span.number
+									|  Number: 
+									strong 120
+								span.rank
+									|  Rank: 
+									strong 120
+						.rankStat.comments.control-group
+							span.control-label Comments in RoR:
+							.controls
+								span.number
+									|  Number: 
+									strong 120
+								span.rank
+									|  Rank: 
+									strong 120
+					.modal-footer
+						input.btn.btn-primary(type='submit',value='Lookup')
+						button.btn(data-dismiss='modal',aria-hidden='true') Close

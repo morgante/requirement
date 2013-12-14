@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var _ = require('underscore');
 
 var Question = require('./question');
+var User = require('./user');
 
 var facebook = require('../lib/facebook');
 
@@ -21,6 +22,37 @@ var schema = mongoose.Schema({
 });
 
 schema.post('save', function (post) {
+	// stats processing for posts
+	User.findOneAndUpdate( { 'fbID': post.from.id },{
+		'fbID': post.from.id,
+		'name': post.from.name
+	}, { 'upsert': true }, function( err, user ) {
+		user.posts.push(post.id);
+		user.posts = _.unique(user.posts);
+		user.fbPosts = user.posts.length;
+
+		user.save(function(err) {
+			if (err) {
+				console.log('err', err);
+			}
+
+			// stats processing for comments
+			if (post.comments) {
+				post.comments.data.forEach(function(comment) {
+					User.findOneAndUpdate( { 'fbID': comment.from.id }, {
+						'fbID': comment.from.id,
+						'name': comment.from.name
+					}, { 'upsert': true }, function( err, user ) {
+
+						User.update({'fbID': comment.from.id}, {$push: {'comments': comment.id}}, function(err) {
+							// console.log('error in comment array', err);
+						});
+					});
+				});
+			}
+		});
+	});
+
 	// FAQ processing
 	if (post.question == null && post.comments) {
 		post.comments.data.forEach(function(comment) {

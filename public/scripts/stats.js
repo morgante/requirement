@@ -13,7 +13,7 @@ $(document).ready( function( ) {
 	// fetch all names
 	$.getJSON( '/api/people/search?type=simple', function( data, status ) {
 		$('#lookup input.name').typeahead({
-			source: data,
+			local: data,
 			updater:function (item) {
 				$('#lookup input.name').val( item );
 				$('#lookup').submit();

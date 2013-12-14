@@ -6,8 +6,10 @@ var userSchema = mongoose.Schema({
 	photo: String,
 	fbID: Number,
 	fbPosts: {type: Number, default: 0},
+	posts: [{type: String}],
 	postRank: Number,
 	fbComments: {type: Number, default: 0},
+	comments: [{type: String}],
 	commentRank: Number
 });
 
